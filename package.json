@@ -1,0 +1,20 @@
+{
+  "name": "alertnode",
+  "version": "1.0.0",
+  "description": "A connector to a mongoDB for alertcoordinator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tim Manchester",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "js-sha256": "^0.9.0",
+    "mongoose": "^5.11.14",
+    "nodemon": "^2.0.7",
+    "uuid": "^8.3.2"
+  }
+}
