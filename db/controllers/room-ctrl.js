@@ -47,19 +47,19 @@ updateRoom = async (req, res) => {
             return res.status(200).json({
                 success: true,
                 message: 'room updated!',
-                data: data
+                room: data
             })
         }
     })    
 }
 
 deleteRoom = async (req, res) => {
-    await Room.findOneAndDelete({ _id: req.params.id }, (err, room) => {
+    await Room.findOneAndDelete({ _id: req.params.id }, (err, data) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }
 
-        if (!room) {
+        if (!data) {
             return res
                 .status(400)
                 .json({ success: true })
@@ -68,16 +68,16 @@ deleteRoom = async (req, res) => {
 }
 
 getRoomById = async (req, res) => {
-    await Room.findOne({ _id: req.params.id }, (err, room) => {
+    await Room.findOne({ _id: req.params.id }, (err, data) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }
 
-        if (!room) {
+        if (!data) {
             return res
                 .status(404).json({ success: false, error: `Room not found` })
         }
-        return res.status(200).json({ success: true, data: room })
+        return res.status(200).json({ success: true, room: data })
     }).catch(err => console.log(err))
 }
 
@@ -96,16 +96,16 @@ getRoomsByUnit = async (req, res) => {
 }
 
 getRooms = async (req, res) => {
-    await Room.find({}, (err, rooms) => {
+    await Room.find({}, (err, data) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }
-        if (!rooms.length) {
+        if (!data.length) {
             return res
                 .status(404)
                 .json({ success: false, error: `Rooms not found` })
         }
-        return res.status(200).json({ success: true, data: rooms})
+        return res.status(200).json({ success: true, rooms: data})
     }).catch(err => console.log(err))
 }
 

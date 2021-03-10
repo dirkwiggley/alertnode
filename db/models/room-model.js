@@ -11,11 +11,10 @@ const Room = new Schema(
         buildingName: { type: String, required: false },
         floorId: { type: String, required: false },
         floorName: { type: String, required: false },
-        name: { type: String, required: true },
-        note: { type: String, required: true },
         unitId: { type: String, required: false },
         unitName: { type: String, required: false },
-        unitNote: { type: String, required: false }
+        unitNote: { type: String, required: false },
+        name: { type: String, required: true }
     },
     { timestamps: true }
 )
