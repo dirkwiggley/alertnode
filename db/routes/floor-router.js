@@ -9,5 +9,6 @@ router.put('/floor/:id', FloorCtrl.updateFloor)
 router.delete('/floor/:id', FloorCtrl.deleteFloor)
 router.get('/floor/:id', FloorCtrl.getFloorById)
 router.get('/floors', FloorCtrl.getFloors)
+router.get('/floors/:id', FloorCtrl.getFloorsByBuilding)
 
 module.exports = router

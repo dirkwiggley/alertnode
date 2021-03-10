@@ -9,5 +9,6 @@ router.put('/building/:id', BuildingCtrl.updateBuilding)
 router.delete('/building/:id', BuildingCtrl.deleteBuilding)
 router.get('/building/:id', BuildingCtrl.getBuildingById)
 router.get('/buildings', BuildingCtrl.getBuildings)
+router.get('/buildings/:id', BuildingCtrl.getBuildingsBySite)
 
 module.exports = router

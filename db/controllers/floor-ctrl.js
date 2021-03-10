@@ -47,19 +47,19 @@ updateFloor = async (req, res) => {
             return res.status(200).json({
                 success: true,
                 message: 'floor updated!',
-                data: data
+                floor: data
             })
         }
     })    
 }
 
 deleteFloor = async (req, res) => {
-    await Floor.findOneAndDelete({ _id: req.params.id }, (err, floor) => {
+    await Floor.findOneAndDelete({ _id: req.params.id }, (err, data) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }
 
-        if (!floor) {
+        if (!data) {
             return res
                 .status(400)
                 .json({ success: true })
@@ -68,30 +68,44 @@ deleteFloor = async (req, res) => {
 }
 
 getFloorById = async (req, res) => {
-    await Floor.findOne({ _id: req.params.id }, (err, floor) => {
+    await Floor.findOne({ _id: req.params.id }, (err, data) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }
 
-        if (!floor) {
+        if (!data) {
             return res
                 .status(404).json({ success: false, error: `Floor not found` })
         }
-        return res.status(200).json({ success: true, data: floor })
+        return res.status(200).json({ success: true, floor: data })
+    }).catch(err => console.log(err))
+}
+
+getFloorsByBuilding = async (req, res) => {
+    await Floor.find({ buildingId: req.params.id }, (err, data) => {
+        if (err) {
+            return res.status(400).json({ success: false, error: err })
+        }
+
+        if (!data) {
+            return res
+                .status(404).json({ success: false, error: `Floors not found` })
+        }
+        return res.status(200).json({ success: true, floors: data })
     }).catch(err => console.log(err))
 }
 
 getFloors = async (req, res) => {
-    await Floor.find({}, (err, floors) => {
+    await Floor.find({}, (err, data) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }
-        if (!floors.length) {
+        if (!data.length) {
             return res
                 .status(404)
                 .json({ success: false, error: `Floors not found` })
         }
-        return res.status(200).json({ success: true, data: floors})
+        return res.status(200).json({ success: true, floors: data})
     }).catch(err => console.log(err))
 }
 
@@ -100,5 +114,6 @@ module.exports = {
     updateFloor,
     deleteFloor,
     getFloors,
-    getFloorById
+    getFloorById,
+    getFloorsByBuilding
 }

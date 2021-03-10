@@ -68,16 +68,30 @@ deleteBuilding = async (req, res) => {
 }
 
 getBuildingById = async (req, res) => {
-    await Building.findOne({ _id: req.params.id }, (err, building) => {
+    await Building.findOne({ _id: req.params.id }, (err, data) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }
 
-        if (!building) {
+        if (!data) {
             return res
                 .status(404).json({ success: false, error: `Building not found` })
         }
-        return res.status(200).json({ success: true, data: building })
+        return res.status(200).json({ success: true, building: data })
+    }).catch(err => console.log(err))
+}
+
+getBuildingsBySite = async (req, res) => {
+    await Building.find({ siteId: req.params.id }, (err, data) => {
+        if (err) {
+            return res.status(400).json({ success: false, error: err })
+        }
+
+        if (!data) {
+            return res
+                .status(404).json({ success: false, error: `Buildings not found` })
+        }
+        return res.status(200).json({ success: true, buildings: data })
     }).catch(err => console.log(err))
 }
 
@@ -100,5 +114,6 @@ module.exports = {
     updateBuilding,
     deleteBuilding,
     getBuildings,
+    getBuildingsBySite,
     getBuildingById
 }

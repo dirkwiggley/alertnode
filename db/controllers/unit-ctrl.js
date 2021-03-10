@@ -54,12 +54,12 @@ updateUnit = async (req, res) => {
 }
 
 deleteUnit = async (req, res) => {
-    await Unit.findOneAndDelete({ _id: req.params.id }, (err, unit) => {
+    await Unit.findOneAndDelete({ _id: req.params.id }, (err, data) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }
 
-        if (!unit) {
+        if (!data) {
             return res
                 .status(400)
                 .json({ success: true })
@@ -68,25 +68,39 @@ deleteUnit = async (req, res) => {
 }
 
 getUnitById = async (req, res) => {
-    await Unit.findOne({ _id: req.params.id }, (err, unit) => {
+    await Unit.findOne({ _id: req.params.id }, (err, data) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }
 
-        if (!unit) {
+        if (!data) {
             return res
                 .status(404).json({ success: false, error: `Unit not found` })
         }
-        return res.status(200).json({ success: true, data: unit })
+        return res.status(200).json({ success: true, unit: data })
+    }).catch(err => console.log(err))
+}
+
+getUnitsByFloor = async (req, res) => {
+    await Unit.find({ floorId: req.params.id }, (err, data) => {
+        if (err) {
+            return res.status(400).json({ success: false, error: err })
+        }
+
+        if (!data) {
+            return res
+                .status(404).json({ success: false, error: `Units not found` })
+        }
+        return res.status(200).json({ success: true, units: data })
     }).catch(err => console.log(err))
 }
 
 getUnits = async (req, res) => {
-    await Unit.find({}, (err, units) => {
+    await Unit.find({}, (err, data) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }
-        if (!units.length) {
+        if (!data.length) {
             return res
                 .status(404)
                 .json({ success: false, error: `Units not found` })
@@ -100,5 +114,6 @@ module.exports = {
     updateUnit,
     deleteUnit,
     getUnits,
-    getUnitById
+    getUnitById,
+    getUnitsByFloor
 }

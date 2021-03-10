@@ -37,7 +37,7 @@ updateAccount = async (req, res) => {
         })
     }
 
-    Account.replaceOne({ _id: body._id}, body, (error, data) => {
+    Account.updateOne({ _id: body._id}, body, (error, data) => {
         if (error) {
             return res.status(404).json({
                 error,

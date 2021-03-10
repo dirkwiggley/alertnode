@@ -81,6 +81,20 @@ getRoomById = async (req, res) => {
     }).catch(err => console.log(err))
 }
 
+getRoomsByUnit = async (req, res) => {
+    await Room.find({ unitId: req.params.id }, (err, data) => {
+        if (err) {
+            return res.status(400).json({ success: false, error: err })
+        }
+
+        if (!data) {
+            return res
+                .status(404).json({ success: false, error: `Rooms not found` })
+        }
+        return res.status(200).json({ success: true, rooms: data })
+    }).catch(err => console.log(err))
+}
+
 getRooms = async (req, res) => {
     await Room.find({}, (err, rooms) => {
         if (err) {
@@ -100,5 +114,6 @@ module.exports = {
     updateRoom,
     deleteRoom,
     getRooms,
-    getRoomById
+    getRoomById,
+    getRoomsByUnit
 }
