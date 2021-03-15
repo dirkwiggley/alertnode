@@ -4,11 +4,7 @@ const Schema = mongoose.Schema
 const Accounts = new Schema(
     {
         name: { type: String, required: true },
-        note: { type: String, required: false },
-        sites: [ { 
-            id: { type: String, required: false },
-            name: { type: String, required: false }
-        } ]
+        note: { type: String, required: false }
     },
     { timestamps: true },
 )

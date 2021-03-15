@@ -11,15 +11,7 @@ const Unit = new Schema(
         buildingName: { type: String, required: false },
         floorId: { type: String, required: false },
         floorName: { type: String, required: false },
-        name: { type: String, required: true },
-        note: { type: String, required: false },
-        rooms: [
-            {
-                id: { type: String, required: false },
-                name: { type: String, required: false },
-                note: { type: String, required: false }
-            }
-        ]
+        name: { type: String, required: true }
     },
     { timestamps: true }
 )

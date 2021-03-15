@@ -109,8 +109,61 @@ getFloors = async (req, res) => {
     }).catch(err => console.log(err))
 }
 
+    // accountId: { type: String, required: false },
+    // accountName: { type: String, required: false },
+    // siteId: { type: String, required: false },
+    // siteName: { type: String, required: false },
+    // buildingId: { type: String, required: false },
+    // buildingName: { type: String, required: false },
+    // name: { type: String, required: true },
+addFloors = async (req, res) => {
+    const body = req.body
+    
+    if (!body) {
+        return res.status(400).json({
+            success: false,
+            error: 'Bad floor data'
+        })
+    }
+
+    const floorName = "Floor "
+    let errs = []
+    for (let i = 1; i <= body.numOfFloors; i++) {
+        const newFloorName = floorName + i
+        floorBody = {}
+        floorBody.accountId = body.accountId
+        floorBody.accountName = body.accountName
+        floorBody.siteId = body.siteId
+        floorBody.siteName = body.siteName
+        floorBody.buildingId = body.buildingId
+        floorBody.buildingName = body.buildingName
+        floorBody.name = newFloorName
+
+        const floor = new Floor(floorBody)
+
+        if (!floor) {
+            errs.push(err)
+        }
+    
+        await floor
+            .save()
+            .catch(error => errs.push(error))
+    }
+    if (errs.length > 0) {
+        return res.status(400).json({ success: false, errors: errs})
+    } else {
+        return res.status(200).json({
+            success: true,
+            floors: { numOfFloors: body.numOfFloors, siteId: body.siteId, buildingId: body.buildingId },
+            message: 'Floors created'
+        })
+    }
+}
+
+
 module.exports = {
     createFloor,
+    addFloors,
     updateFloor,
     deleteFloor,
     getFloors,

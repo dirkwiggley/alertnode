@@ -11,8 +11,7 @@ function getAccounts() {
         },
         {
             name: "Dr. Kevorkian Memorial Hospital",
-            note: "",
-            sites: [],
+            note: ""
             // address: {
             //     addressLine1: "1313 Mockingbird Lane",
             //     addressLine2: "",
@@ -49,7 +48,6 @@ function getAccounts() {
         {
             name: "International House of Pancreas",
             note: "",
-            sites: [],
             // address: {
             //     addressLine1: "22 Thorax Ave",
             //     addressLine2: "",

@@ -9,13 +9,7 @@ const Floor = new Schema(
         siteName: { type: String, required: false },
         buildingId: { type: String, required: false },
         buildingName: { type: String, required: false },
-        name: { type: String, required: true },
-        note: { type: String, required: false },
-        units: [ { 
-            id: { type: String, required: false },
-            name: { type: String, required: false },
-            note: { type: String, required: false },
-        } ]
+        name: { type: String, required: true }
     },
     { timestamps: true }
 )

@@ -6,12 +6,7 @@ const Site = new Schema(
         accountId: { type: String, required: false },
         accountName: { type: String, required: false },
         name: { type: String, required: true },
-        note: { type: String, required: false },
-        buildings: [ { 
-            id: { type: String, required: false },
-            name: { type: String, required: false },
-            note: { type: String, required: false },
-        } ]
+        note: { type: String, required: false }
     },
     { timestamps: true }
 )

@@ -6,9 +6,7 @@ function getRooms() {
             buildingName: "Main Building",
             floorName: "Sub Basement",
             name: "001",
-            note: "001",
-            unitName: "Morgue",
-            unitNote: ""
+            unitName: "Morgue"
         },
         {
             accountName: "Poppa Pills",
@@ -16,9 +14,7 @@ function getRooms() {
             buildingName: "Main Building",
             floorName: "Basement",
             name: "01",
-            note: "01",
-            unitName: "Dispensary",
-            unitNote: "Pharmacy"
+            unitName: "Dispensary"
         },
         {
             accountName: "Poppa Pills",
@@ -26,9 +22,7 @@ function getRooms() {
             buildingName: "Main Building",
             floorName: "Ground Floor",
             name: "101",
-            note: "101",
-            unitName: "Emergency Dept",
-            unitNote: "ED"
+            unitName: "Emergency Dept"
         },
         {
             accountName: "Poppa Pills",
@@ -36,9 +30,7 @@ function getRooms() {
             buildingName: "Main Building",
             floorName: "Second Floor",
             name: "201",
-            note: "201",
-            unitName: "Invasive Medicine",
-            unitNote: "Surgery"
+            unitName: "Invasive Medicine"
         },
         {
             accountName: "Poppa Pills",
@@ -46,9 +38,7 @@ function getRooms() {
             buildingName: "Main Building",
             floorName: "Second Floor",
             name: "202",
-            note: "202",
-            unitName: "Recovery",
-            unitNote: "Critical Care"
+            unitName: "Recovery"
         }        
     ]
 }

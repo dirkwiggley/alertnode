@@ -19,10 +19,15 @@ createBuilding = (req, res) => {
     building
         .save()
         .then(() => {
-            return res.status(201).json({
+            return res.status(200).json({
                 success: true,
-                id: building._id,
+                building: building,
                 message: 'Building created'
+            })
+        }).catch(err => {
+            return res.status(400).json({
+                success: false,
+                error: err
             })
         })
 }
