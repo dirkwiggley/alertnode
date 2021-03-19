@@ -6,7 +6,7 @@ createRoom = (req, res) => {
     if (!body) {
         return res.status(400).json({
             success: false,
-            error: 'You must provide an room'
+            error: 'You must provide a room'
         })
     }
 
@@ -37,7 +37,7 @@ updateRoom = async (req, res) => {
         })
     }
 
-    Room.replaceOne({ _id: body._id}, body, (error, data) => {
+    Room.findOneAndUpdate({ _id: body._id}, body, {new: true}, (error, data) => {
         if (error) {
             return res.status(404).json({
                 error,

@@ -37,7 +37,7 @@ updateUnit = async (req, res) => {
         })
     }
 
-    Unit.replaceOne({ _id: body._id}, body, (error, data) => {
+    Unit.findOneAndUpdate({ _id: body._id}, body, {new: true}, (error, data) => {
         if (error) {
             return res.status(404).json({
                 error,
@@ -47,7 +47,7 @@ updateUnit = async (req, res) => {
             return res.status(200).json({
                 success: true,
                 message: 'unit updated!',
-                data: data
+                unit: data
             })
         }
     })    

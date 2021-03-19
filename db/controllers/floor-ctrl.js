@@ -37,7 +37,7 @@ updateFloor = async (req, res) => {
         })
     }
 
-    Floor.replaceOne({ _id: body._id}, body, (error, data) => {
+    Floor.findOneAndUpdate({ _id: body._id}, body, {new: true}, (error, data) => {
         if (error) {
             return res.status(404).json({
                 error,

@@ -42,7 +42,7 @@ updateBuilding = async (req, res) => {
         })
     }
 
-    Building.replaceOne({ _id: body._id}, body, (error, data) => {
+    Building.findOneAndUpdate({ _id: body._id}, body, {new: true}, (error, data) => {
         if (error) {
             return res.status(404).json({
                 error,
@@ -52,7 +52,7 @@ updateBuilding = async (req, res) => {
             return res.status(200).json({
                 success: true,
                 message: 'building updated!',
-                data: data
+                building: data
             })
         }
     })    

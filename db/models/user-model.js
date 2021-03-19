@@ -9,7 +9,17 @@ const User = new Schema(
         email: { type: String, required: false },
         isAdmin: { type: Boolean, required: true },
         isUser: { type: Boolean, required: true },
-        token: { id: { type: String, required: false }, issued: { type: Number, required: false }, expires: { type: Number, required: false } }
+        accountId: { type: String, required: false },
+        siteId: { type: String, required: false },
+        buildingId: { type: String, required: false },
+        floorId: { type: String, required: false },
+        unitId: { type: String, required: false },
+        roomId: { type: String, required: false },
+        token: { 
+            id: { type: String, required: false }, 
+            issued: { type: Number, required: false }, 
+            expires: { type: Number, required: false } 
+        }
     },
     { timestamps: true },
 )

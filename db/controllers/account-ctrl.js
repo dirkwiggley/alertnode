@@ -37,7 +37,7 @@ updateAccount = async (req, res) => {
         })
     }
 
-    Account.updateOne({ _id: body._id}, body, (error, data) => {
+    Account.findOneAndUpdate({ _id: body._id}, body, {new: true}, (error, data) => {
         if (error) {
             return res.status(404).json({
                 error,

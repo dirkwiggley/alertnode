@@ -8,6 +8,11 @@ function getUsers() {
             email: 'dm_tim@yahoo.com',
             isAdmin: true,
             isUser: true,
+            accountId: "",
+            siteId: "",
+            buildingId: "",
+            floorId: "",
+            unitId: "",
             token: null
         }
     ]
