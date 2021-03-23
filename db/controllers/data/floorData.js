@@ -23,7 +23,19 @@ function getFloors() {
             siteName: "Poppa Pills Vegas",
             buildingName: "Main Building",
             name: "Second Floor"
-        }        
+        },
+        {
+            accountName: "Appendectomy Self Service",
+            siteName: "Bellybutton Vista",
+            buildingName: "Hernia Heights",
+            name: "Main"
+        },
+        {
+            accountName: "Semicolon Cancer Centers",
+            siteName: "Sigmoid Center",
+            floorName: "Constitutional Corner",
+            name: "Bedpan Alley"
+        }
     ]
 }
 

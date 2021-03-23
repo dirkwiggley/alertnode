@@ -3,8 +3,7 @@ const Schema = mongoose.Schema
 
 const Accounts = new Schema(
     {
-        name: { type: String, required: true },
-        note: { type: String, required: false }
+        name: { type: String, required: true }
     },
     { timestamps: true },
 )

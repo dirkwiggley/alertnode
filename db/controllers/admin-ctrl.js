@@ -69,7 +69,7 @@ async function initItems(req, res, items, classType, pluralCap, singular) {
     if (responses.length > 0) {
         return res.status(400).json( { success: false, responses: responses } )
     }
-    return res.status(201).json({
+    return res.status(200).json({
         success: true,
         message: successMsg,
     })

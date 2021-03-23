@@ -22,7 +22,7 @@ insertUser = (req, res) => {
         .then(() => {
             return res.status(201).json({
                 success: true,
-                id: user._id,
+                user: user,
                 message: 'User created!',
             })
         })
@@ -47,7 +47,7 @@ updateUser = async (req, res) => {
     let token = createToken();
     body.token = token;
 
-    User.replaceOne({ _id: body._id}, body, (error, data) => {
+    User.findOneAndUpdate({ _id: body._id}, body, {new: true}, (error, data) => {
         if (error) {
             return res.status(404).json({
                 error,
@@ -57,7 +57,7 @@ updateUser = async (req, res) => {
             return res.status(200).json({
                 success: true,
                 message: 'User updated!',
-                data: data
+                user: data
             })
         }
     })    

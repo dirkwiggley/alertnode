@@ -6,5 +6,7 @@ module.exports = {
     UNIT : 'UNIT',
     TITLE : 'TITLE',
     ROLE : 'ROLE',
-    USER: 'USER'
+    USER: 'USER',
+    VENDOR: 'VENDOR',
+    FEATURE: 'FEATURE'
 }

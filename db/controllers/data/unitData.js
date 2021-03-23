@@ -34,7 +34,28 @@ function getUnits() {
             buildingName: "Main Building",
             floorName: "Second Floor",
             name: "Recovery"
-        }        
+        },
+        {
+            accountName: "Appendectomy Self Service",
+            siteName: "Bellybutton Vista",
+            buildingName: "Hernia Heights",
+            floorName: "Main",
+            name: "Discrete Unit"
+        },
+        {
+            accountName: "Semicolon Cancer Centers",
+            siteName: "Sigmoid Center",
+            floorName: "Constitutional Corner",
+            floorName: "Bedpan Alley",
+            name: "Unhappy Unit"
+        },
+        {
+            accountName: "Semicolon Cancer Centers",
+            siteName: "Sigmoid Center",
+            floorName: "Constitutional Corner",
+            floorName: "Bedpan Alley",
+            name: "Smelly Rooms"
+        }
     ]
 }
 

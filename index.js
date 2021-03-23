@@ -31,6 +31,8 @@ const unitRouter = require('./db/routes/unit-router')
 const roomRouter = require('./db/routes/room-router')
 const userRouter = require('./db/routes/user-router')
 const adminRouter = require('./db/routes/admin-router')
+const vendorRouter = require('./db/routes/vendor-router')
+const featureRouter = require('./db/routes/feature-router')
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
@@ -41,6 +43,7 @@ app.get('/', (req, res) => {
 
 app.use('/api', roleRouter, titleRouter, accountRouter, siteRouter, buildingRouter)
 app.use('/api', floorRouter, unitRouter, roomRouter, userRouter, adminRouter)
+app.use('/api', vendorRouter, featureRouter)
 
 function error(err, req, res, next) {
     console.error(err.stack);
