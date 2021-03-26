@@ -32,7 +32,7 @@ const roomRouter = require('./db/routes/room-router')
 const userRouter = require('./db/routes/user-router')
 const adminRouter = require('./db/routes/admin-router')
 const vendorRouter = require('./db/routes/vendor-router')
-const featureRouter = require('./db/routes/feature-router')
+const featureRouter = require('./db/routes/model-router')
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())

@@ -1,4 +1,4 @@
-function getFeatures() {
+function getModels() {
     return [
         {
             vendorName: "Ramshackle Respirators",
@@ -19,4 +19,4 @@ function getFeatures() {
     ]
 }
 
-module.exports = { getFeatures }
+module.exports = { getModels }

@@ -19,12 +19,18 @@ createAccount = (req, res) => {
     account
         .save()
         .then(() => {
-            return res.status(201).json({
+            return res.status(200).json({
                 success: true,
-                id: account._id,
+                account: account,
                 message: 'Account created'
             })
         })
+        .catch(error => {
+            return res.stats(400).json({
+                success: false,
+                error: error
+            })
+        } )
 }
 
 updateAccount = async (req, res) => {

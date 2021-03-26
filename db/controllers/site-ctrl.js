@@ -21,7 +21,7 @@ createSite = async (req, res) => {
         .then(() => {
             return res.status(200).json({
                 success: true,
-                id: site._id,
+                site: site,
                 message: 'Site created'
             })
         })

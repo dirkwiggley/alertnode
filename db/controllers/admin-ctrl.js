@@ -18,6 +18,10 @@ const Room = require('../models/room-model')
 const roomData = require('./data/roomData')
 const User = require('../models/user-model')
 const userData = require('./data/userData')
+const Vendor = require('../models/vendor-model')
+const vendorData = require('./data/vendorData')
+const Model = require('./data/modelData')
+const modelData = require('./data/modelData')
 
 initDataTypes = (req, res) => {
     const bodyList = [
@@ -29,7 +33,9 @@ initDataTypes = (req, res) => {
         { name: 'floor' },
         { name: 'unit' },
         { name: 'room' },
-        { name: 'contact' }
+        { name: 'contact' },
+        { name: 'vendor' },
+        { name: 'model' }
     ]
 
     bodyList.forEach(body => {
@@ -139,6 +145,16 @@ function initRooms(req, res) {
     initItems(req, res, items, Room, 'Rooms', 'room')
 }
 
+function initVendors(req, res) {
+    const items = vendorData.getVendors()
+    initItems(req, res, items, Vendor, 'Vendors', 'vendor')
+}
+
+function initModels(req, res) {
+    const items = modelData.getModels()
+    initItems(req, res, items, Model, 'Models', 'model')
+}
+
 function initUsers(req, res) {
     const items = userData.getUsers();
     // seed user pwds are not encrypted in the data file
@@ -181,7 +197,13 @@ getItemId = (type, name, params) => {
             break;
         case DataTypes.USER:
             items = params.users ? params.users : [];
-            break;            
+            break;
+        case DataTypes.VENDOR:
+            items = params.vendors ? params.vendors : [];
+            break;
+        case DataTypes.MODEL:
+            items = params.models ? params.models : [];    
+            break;
         default:
             console.log(type, 'WTF?');
     }
@@ -206,6 +228,8 @@ async function updateIds(req, res) {
     var floors = null;
     var units = null;
     var users = null;
+    var vendors = null;
+    var models = null;
 
     roles = await Role.find({ }, (err, roleList) => {
         if (err) {
@@ -288,6 +312,24 @@ async function updateIds(req, res) {
         return userList;
     });
 
+    vendors = await Vendor.find({ }, (err, vendorList) => {
+        if (err) {
+            console.log('Vendors not found!');
+            return;
+        }
+
+        return vendorList;
+    });
+
+    models = await Model.find({ }, (err, modelList) => {
+        if (err) {
+            console.log('Models not found!');
+            return;
+        }
+
+        return modelList;
+    });
+
     let params = {
         'titles': titles,
         'roles': roles,
@@ -298,6 +340,8 @@ async function updateIds(req, res) {
         'rooms': rooms,
         'units': units,
         'users': users,
+        'vendors': vendors,
+        'models': models
     }
     updateAll(params);
 
@@ -332,23 +376,6 @@ updateAll = (params) => {
             }
         }
     }
-    if (params.accounts) {
-        for (var account of params.accounts) {
-            let saveAccount = false;
-            // get items that require id substitution here
-            if (account.sites && account.sites.length > 0) {
-                for (site of account.sites) {
-                    site.id = getItemId(DataTypes.SITE, site.name, params)
-                    if (site.id) { 
-                        saveAccount = true 
-                    }
-                }
-            }
-            if (saveAccount) {
-                account.save().catch(error => console.log('[updateAll] saveAccount: ' + error))
-            }
-        }
-    }
     if (params.sites) {
         for (var site of params.sites) {
             let saveSite = false;
@@ -357,14 +384,6 @@ updateAll = (params) => {
                 site.accountId = getItemId(DataTypes.ACCOUNT, site.accountName, params)
                 if (site.accountId) {
                     saveSite = true
-                }
-            }
-            for (building of site.buildings) {
-                if (!building.id) {
-                    building.id = getItemId(DataTypes.BUILDING, building.name, params)
-                    if (building.id) {
-                        saveSite = true
-                    }
                 }
             }
             if (saveSite) {
@@ -386,14 +405,6 @@ updateAll = (params) => {
                 building.siteId = getItemId(DataTypes.SITE, building.siteName, params)
                 if (building.siteId) {
                     saveBuidling = true
-                }
-            }
-            for (floor of building.floors) {
-                if (!floor.id) {
-                    floor.id = getItemId(DataTypes.FLOOR, floor.name, params)
-                    if (floor.id) {
-                        saveBuidling = true
-                    }
                 }
             }
             if (saveBuidling) {
@@ -421,14 +432,6 @@ updateAll = (params) => {
                 floor.buildingId = getItemId(DataTypes.BUILDING, floor.buildingName, params)
                 if (floor.buildingId) {
                     saveFloor = true
-                }
-            }
-            for (var unit of floor.units) {
-                if (!unit.id) {
-                    unit.id = getItemId(DataTypes.UNIT, unit.name, params)
-                    if (unit.id) {
-                        saveFloor = true
-                    }
                 }
             }
             if (saveFloor) {
@@ -462,14 +465,6 @@ updateAll = (params) => {
                 unit.floorId = getItemId(DataTypes.FLOOR, unit.floorName, params)
                 if (unit.buildingId) {
                     saveUnit = true
-                }
-            }
-            for (var room of unit.rooms) {
-                if (!room.id) {
-                    room.id = getItemId(DataTypes.ROOM, room.name, params)
-                    if (room.id) {
-                        saveUnit = true
-                    }
                 }
             }
             if (saveUnit) {
@@ -516,6 +511,23 @@ updateAll = (params) => {
             }
         }
     }
+    
+    if (params.models) {
+        for (var model of params.models) {
+            let saveModel = false;
+            // get items that require id substitution here
+            if (!model.vendorId) {
+                model.vendorId = getItemId(DataTypes.VENDOR, model.vendorName, params)
+                if (model.vendorId) {
+                    saveSite = true
+                }
+            }
+            if (saveModel) {
+                model.save().catch(error => console.log('[updateAll] saveModel: ' + error))
+            }
+        }
+    }
+
 };
 
 module.exports = {
@@ -528,5 +540,7 @@ module.exports = {
     initUnits,
     initRooms,
     initUsers,
+    initVendors,
+    initModels,
     updateIds
 }

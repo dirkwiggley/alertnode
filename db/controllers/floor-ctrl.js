@@ -21,7 +21,7 @@ createFloor = (req, res) => {
         .then(() => {
             return res.status(201).json({
                 success: true,
-                id: floor._id,
+                floor: floor,
                 message: 'Floor created'
             })
         })

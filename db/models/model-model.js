@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const Feature = new Schema(
+const Model = new Schema(
     {
         vendorId: { type: String, required: false },
         vendorName: { type: String, required: false },
@@ -10,4 +10,4 @@ const Feature = new Schema(
     { timestamps: true }
 )
 
-module.exports = mongoose.model('feature', Feature)
+module.exports = mongoose.model('model', Model)

@@ -8,5 +8,5 @@ module.exports = {
     ROLE : 'ROLE',
     USER: 'USER',
     VENDOR: 'VENDOR',
-    FEATURE: 'FEATURE'
+    MODEL: 'MODEL'
 }
