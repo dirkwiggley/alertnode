@@ -25,6 +25,9 @@ createVendor = (req, res) => {
                 message: 'Vendor created'
             })
         })
+        .catch(error => {
+            return res.status(401).json({ success: false, error: error })
+        })
 }
 
 updateVendor = async (req, res) => {

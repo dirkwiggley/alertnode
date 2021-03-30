@@ -95,10 +95,25 @@ getModelsByVendorId = async (req, res) => {
     }).catch(err => console.log(err))
 }
 
+getModels = async (req, res) => {
+    await Model.find({  }, (err, data) => {
+        if (err) {
+            return res.status(400).json({ success: false, error: err })
+        }
+        if (!data.length) {
+            return res
+                .status(404)
+                .json({ success: false, error: `Models not found` })
+        }
+        return res.status(200).json({ success: true, models: data})
+    }).catch(err => console.log(err))
+}
+
 module.exports = {
     createModel,
     updateModel,
     deleteModel,
     getModelById,
-    getModelsByVendorId
+    getModelsByVendorId,
+    getModels
 }

@@ -15,7 +15,11 @@ const Building = new Schema(
             stateProvince: { type: String, required: false },
             postalCode: { type: String, required: false },
             country: { type: String, required: false },
-        }
+        },
+        vendors: [ { 
+                vendorId: { type: String, required: false },
+                vendorName: { type: String, required: false } }
+        ]
     },
     { timestamps: true }
 )

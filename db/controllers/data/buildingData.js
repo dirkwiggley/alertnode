@@ -11,7 +11,8 @@ function getBuildings() {
                 stateProvince: "Nevada",
                 postalCode: "44333",
                 country: "USA",
-            }
+            },
+            vendors: []
         },
         {
             accountName: "Poppa Pills",
@@ -24,27 +25,32 @@ function getBuildings() {
                 stateProvince: "Nevada",
                 postalCode: "44333",
                 country: "USA",
-            }
+            },
+            vendors: []
         },
         {
             accountName: "International House of Pancreas",
             siteName: "Livermore",
             name: "Cirrhosis Corner",
+            vendors: []
         },
         {
             accountName: "Appendectomy Self Service",
             siteName: "Bellybutton Vista",
-            name: "Hernia Heights"
+            name: "Hernia Heights",
+            vendors: []
         },
         {
             accountName: "Semicolon Cancer Centers",
             siteName: "Sigmoid Center",
-            name: "Constitutional Corner"
+            name: "Constitutional Corner",
+            vendors: []
         },
         {
             accountName: "Semicolon Cancer Centers",
             siteName: "Transverse Way",
-            name: "Sphinter Circle"
+            name: "Sphinter Circle",
+            vendors: []
         }
 
     ];

@@ -8,5 +8,6 @@ module.exports = {
     ROLE : 'ROLE',
     USER: 'USER',
     VENDOR: 'VENDOR',
-    MODEL: 'MODEL'
+    MODEL: 'MODEL',
+    ALARM_TYPE: "ALARM_TYPE"
 }

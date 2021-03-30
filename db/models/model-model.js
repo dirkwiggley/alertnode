@@ -5,6 +5,8 @@ const Model = new Schema(
     {
         vendorId: { type: String, required: false },
         vendorName: { type: String, required: false },
+        alarmTypeId: { type: String, required: false },
+        alarmTypeName: { type: String, required: false },
         name: { type: String, required: true }
     },
     { timestamps: true }

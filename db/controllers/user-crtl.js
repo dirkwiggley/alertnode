@@ -2,6 +2,7 @@
 const { v4: uuidv4 } = require('uuid')
 const sha256 = require('js-sha256');
 const User = require('../models/user-model')
+
 insertUser = (req, res) => {
     const body = req.body
 
@@ -133,7 +134,6 @@ login = async (req, res) => {
         if (err) {
             return res.status(400).json({ success: false, error: err })
         }
-
         if (!user) {
             return res
                 .status(404)
@@ -145,16 +145,16 @@ login = async (req, res) => {
             user.token = token
             user.save().then(() => {
                 return res.status(200).json({
-                    success: true,
+                    syccess: true,
                     user: user,
-                    message: 'User logged in!',
+                    message: `User logged in!`
                 })
             })
             .catch(error => {
-                return res.status(400).json({ success: false, error: "Could not update token" })
+                return res.status(400).json({ success: false, error: `Could not update token`})
             })
         } else {
-            return res.status(400).json({ success: false, error: "Login id and/or Password not correct" })
+            return res.status(400).json({ success: false, error: `Login id and/or password not correct` })
         }
     }).catch(err => console.log(err))
 }

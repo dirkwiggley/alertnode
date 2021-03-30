@@ -9,5 +9,6 @@ router.put('/model/:id', ModelCtrl.updateModel)
 router.delete('/model/:id', ModelCtrl.deleteModel)
 router.get('/model/:id', ModelCtrl.getModelById)
 router.get('/models/:id', ModelCtrl.getModelsByVendorId)
+router.get('/models', ModelCtrl.getModels)
 
 module.exports = router
