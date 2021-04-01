@@ -16,9 +16,13 @@ const Building = new Schema(
             postalCode: { type: String, required: false },
             country: { type: String, required: false },
         },
-        vendors: [ { 
-                vendorId: { type: String, required: false },
-                vendorName: { type: String, required: false } }
+        vendors: [
+            {
+                alarmTypeId: { type: String, required: false },
+                vendors: [
+                    { type: String, required: false }
+                ]
+            }
         ]
     },
     { timestamps: true }
