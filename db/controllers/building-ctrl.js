@@ -1,36 +1,43 @@
 const Building = require('../models/building-model')
 
 createBuilding = (req, res) => {
-    const body = req.body
+    console.log("accountId: "+req.body.accountId)
+    console.log("siteId: "+req.body.siteId)
+    console.log("name: "+req.body.name)
+    Building.findOne({ accountId: req.body.accountId, siteId: req.body.siteId, name: req.body.name })
+    .then((response) => {
+        if (response && response.id) {
+            return res.status(400).json({ success: false, error: "A building with than name exists"});
+        }
+        const body = req.body
     
-    if (!body) {
-        return res.status(400).json({
-            success: false,
-            error: 'You must provide an building'
-        })
-    }
-
-    const building = new Building(body)
-
-    if (!building) {
-        return res.status(400).json({ success: false, error: err })
-    }
-
-    building.markModified('vendors');
-    building
-        .save()
-        .then(() => {
-            return res.status(200).json({
-                success: true,
-                building: building,
-                message: 'Building created'
-            })
-        }).catch(err => {
+        if (!body) {
             return res.status(400).json({
                 success: false,
-                error: err
+                error: 'You must provide a building'
             })
-        })
+        }
+    
+        const building = new Building(body)
+    
+        if (!building) {
+            return res.status(400).json({ success: false, error: err })
+        }
+    
+        building
+            .save()
+            .then(() => {
+                return res.status(200).json({
+                    success: true,
+                    message: 'Building created'
+                })
+            }).catch(err => {
+                return res.status(400).json({
+                    success: false,
+                    error: err
+                })
+            })
+    }).catch(err => console.log(err))
 }
 
 updateBuilding = async (req, res) => {

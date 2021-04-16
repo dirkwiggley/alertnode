@@ -1,30 +1,37 @@
 const Floor = require('../models/floor-model')
 
 createFloor = (req, res) => {
-    const body = req.body
-    
-    if (!body) {
-        return res.status(400).json({
-            success: false,
-            error: 'You must provide an floor'
-        })
-    }
+    Floor.findOne({ accountId: req.body.accountId, siteId: req.body.siteId, buildingId: req.body.buildingId, name: req.body.name })
+    .then((response) => {
+        if (response && response.id) {
+            return res.status(400).json({ success: false, error: "A building with than name exists"});
+        }
 
-    const floor = new Floor(body)
-
-    if (!floor) {
-        return res.status(400).json({ success: false, error: err })
-    }
-
-    floor
-        .save()
-        .then(() => {
-            return res.status(201).json({
-                success: true,
-                floor: floor,
-                message: 'Floor created'
+        const body = req.body
+        
+        if (!body) {
+            return res.status(400).json({
+                success: false,
+                error: 'You must provide an floor'
             })
-        })
+        }
+
+        const floor = new Floor(body)
+
+        if (!floor) {
+            return res.status(400).json({ success: false, error: err })
+        }
+
+        floor
+            .save()
+            .then(() => {
+                return res.status(201).json({
+                    success: true,
+                    floor: floor,
+                    message: 'Floor created'
+                })
+            })
+    })
 }
 
 updateFloor = async (req, res) => {

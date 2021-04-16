@@ -1,36 +1,43 @@
 const Account = require('../models/account-model')
 
 createAccount = (req, res) => {
-    const body = req.body
-    
-    if (!body) {
-        return res.status(400).json({
-            success: false,
-            error: 'You must provide an account'
-        })
-    }
+    Account.findOne({ name: req.body.name })
+    .then((response) => {
+        if (response && response.id) {
+            return res.status(400).json({ success: false, error: "An account with than name exists"});
+        }
 
-    const account = new Account(body)
-
-    if (!account) {
-        return res.status(400).json({ success: false, error: err })
-    }
-
-    account
-        .save()
-        .then(() => {
-            return res.status(200).json({
-                success: true,
-                account: account,
-                message: 'Account created'
-            })
-        })
-        .catch(error => {
-            return res.stats(400).json({
+        const body = req.body
+        
+        if (!body) {
+            return res.status(400).json({
                 success: false,
-                error: error
+                error: 'You must provide an account'
             })
-        } )
+        }
+
+        const account = new Account(body)
+
+        if (!account) {
+            return res.status(400).json({ success: false, error: err })
+        }
+
+        account
+            .save()
+            .then(() => {
+                return res.status(200).json({
+                    success: true,
+                    account: account,
+                    message: 'Account created'
+                })
+            })
+            .catch(error => {
+                return res.stats(400).json({
+                    success: false,
+                    error: error
+                })
+            } )
+    })
 }
 
 updateAccount = async (req, res) => {

@@ -1,36 +1,43 @@
 const Site = require('../models/site-model')
 
 createSite = async (req, res) => {
-    const body = req.body
-    
-    if (!body) {
-        return res.status(400).json({
-            success: false,
-            error: 'You must provide an site'
-        })
-    }
+    Site.findOne({ accountId: req.body.accountId, name: req.body.name })
+    .then((response) => {
+        if (response && response.id) {
+            return res.status(400).json({ success: false, error: "A site with than name exists"});
+        }
 
-    const site = new Site(body)
-
-    if (!site) {
-        return res.status(400).json({ success: false, error: err })
-    }
-
-    await site
-        .save()
-        .then(() => {
-            return res.status(200).json({
-                success: true,
-                site: site,
-                message: 'Site created'
-            })
-        })
-        .catch(error => {
-            return res.stats(400).json({
+        const body = req.body
+        
+        if (!body) {
+            return res.status(400).json({
                 success: false,
-                message: error
+                error: 'You must provide an site'
             })
-        })
+        }
+
+        const site = new Site(body)
+
+        if (!site) {
+            return res.status(400).json({ success: false, error: err })
+        }
+
+        site
+            .save()
+            .then(() => {
+                return res.status(200).json({
+                    success: true,
+                    site: site,
+                    message: 'Site created'
+                })
+            })
+            .catch(error => {
+                return res.stats(400).json({
+                    success: false,
+                    message: error
+                })
+            })
+    })
 }
 
 updateSite = async (req, res) => {

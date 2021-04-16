@@ -1,30 +1,37 @@
 const Room = require('../models/room-model')
 
 createRoom = (req, res) => {
-    const body = req.body
-    
-    if (!body) {
-        return res.status(400).json({
-            success: false,
-            error: 'You must provide a room'
-        })
-    }
+    Room.findOne({ accountId: req.body.accountId, siteId: req.body.siteId, buildingId: req.body.buildingId, floorId: req.body.floorId, unitId: req.body.unitId, name: req.body.name })
+    .then((response) => {
+        if (response && response.id) {
+            return res.status(400).json({ success: false, error: "A building with than name exists"});
+        }
 
-    const room = new Room(body)
-
-    if (!room) {
-        return res.status(400).json({ success: false, error: err })
-    }
-
-    room
-        .save()
-        .then(() => {
-            return res.status(201).json({
-                success: true,
-                id: room._id,
-                message: 'Room created'
+        const body = req.body
+        
+        if (!body) {
+            return res.status(400).json({
+                success: false,
+                error: 'You must provide a room'
             })
-        })
+        }
+
+        const room = new Room(body)
+
+        if (!room) {
+            return res.status(400).json({ success: false, error: err })
+        }
+
+        room
+            .save()
+            .then(() => {
+                return res.status(201).json({
+                    success: true,
+                    id: room._id,
+                    message: 'Room created'
+                })
+            })
+    })
 }
 
 updateRoom = async (req, res) => {

@@ -1,30 +1,37 @@
 const Unit = require('../models/unit-model')
 
 createUnit = (req, res) => {
-    const body = req.body
-    
-    if (!body) {
-        return res.status(400).json({
-            success: false,
-            error: 'You must provide an unit'
-        })
-    }
+    Unit.findOne({ accountId: req.body.accountId, siteId: req.body.siteId, buildingId: req.body.buildingId, floorId: req.body.floorId, name: req.body.name })
+    .then((response) => {
+        if (response && response.id) {
+            return res.status(400).json({ success: false, error: "A building with than name exists"});
+        }
 
-    const unit = new Unit(body)
-
-    if (!unit) {
-        return res.status(400).json({ success: false, error: err })
-    }
-
-    unit
-        .save()
-        .then(() => {
-            return res.status(201).json({
-                success: true,
-                id: unit._id,
-                message: 'Unit created'
+        const body = req.body
+        
+        if (!body) {
+            return res.status(400).json({
+                success: false,
+                error: 'You must provide an unit'
             })
-        })
+        }
+
+        const unit = new Unit(body)
+
+        if (!unit) {
+            return res.status(400).json({ success: false, error: err })
+        }
+
+        unit
+            .save()
+            .then(() => {
+                return res.status(201).json({
+                    success: true,
+                    id: unit._id,
+                    message: 'Unit created'
+                })
+            })
+    })
 }
 
 updateUnit = async (req, res) => {
