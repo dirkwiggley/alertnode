@@ -145,7 +145,7 @@ login = async (req, res) => {
             user.token = token
             user.save().then(() => {
                 return res.status(200).json({
-                    syccess: true,
+                    success: true,
                     user: user,
                     message: `User logged in!`
                 })
