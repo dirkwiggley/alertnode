@@ -45,10 +45,10 @@ updateUser = async (req, res) => {
         })
     }
 
-    let token = createToken();
-    body.token = token;
+    let token = createToken()
+    body.token = token
 
-    User.findOneAndUpdate({ _id: body._id}, body, {new: true}, (error, data) => {
+    User.findOneAndUpdate({ _id: body._id}, body, { returnOriginal: false }, (error, data) => {
         if (error) {
             return res.status(404).json({
                 error,
@@ -61,9 +61,8 @@ updateUser = async (req, res) => {
                 user: data
             })
         }
-    })    
+    })
 }
-
 
 deleteUser = async (req, res) => {
     await User.findOneAndDelete({ _id: req.params.id }, (err, user) => {
@@ -119,6 +118,28 @@ getAllUsers = async (req, res) => {
 
         return res.status(200).json({ success: true, users: users })
     })
+}
+
+getUsersByAccountId = async (req, res) => {
+    const byLogin = { login: 1 }
+    await User.find({ accountId: req.params.id }, (err, data) => {
+        if (err) {
+            return res.status(400).json({ success: false, error: err })
+        }
+
+        if (!user) {
+            return res
+                .status(404)
+                .json({ success: false, error: `Users not found` })
+        }
+    }).sort(byLogin).exec(function(err, result) {
+        if (err) {
+            console.log(err)
+            return res.status(400).json({ success: false, error: err })
+        }
+
+        return res.status(200).json({ success: true, users: data })
+    }).catch(err => console.log(err))
 }
 
 createToken = () => {
@@ -246,6 +267,7 @@ module.exports = {
     updateUser,
     deleteUser,
     getAllUsers,
+    getUsersByAccountId,
     getUserById,
     login,
     refreshToken,

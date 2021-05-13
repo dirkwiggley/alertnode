@@ -12,5 +12,6 @@ router.get('/user', UserCtrl.getAllUsers)
 router.post('/user/login', UserCtrl.login)
 router.post('/user/refreshtoken', UserCtrl.refreshToken)
 router.post('/user/checktoken', UserCtrl.checkToken)
+router.get('/users/:id', UserCtrl.getUsersByAccountId)
 
 module.exports = router
