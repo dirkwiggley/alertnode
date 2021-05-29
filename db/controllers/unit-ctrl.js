@@ -27,7 +27,7 @@ createUnit = (req, res) => {
             .then(() => {
                 return res.status(201).json({
                     success: true,
-                    id: unit._id,
+                    unit: unit,
                     message: 'Unit created'
                 })
             })

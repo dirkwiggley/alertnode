@@ -29,6 +29,7 @@ createBuilding = (req, res) => {
             .then(() => {
                 return res.status(200).json({
                     success: true,
+                    building: building,
                     message: 'Building created'
                 })
             }).catch(err => {

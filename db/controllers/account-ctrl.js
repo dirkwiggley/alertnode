@@ -32,7 +32,7 @@ createAccount = (req, res) => {
                 })
             })
             .catch(error => {
-                return res.stats(400).json({
+                return res.status(400).json({
                     success: false,
                     error: error
                 })
